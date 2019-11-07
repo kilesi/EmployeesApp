@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         employeesViemodel = ViewModelProviders.of(this).get(EmployeesViewModel::class.java)
 
-        employeesViemodel?.listOfEmployees()?.observe(this, Observer {
+        employeesViemodel!!.listOfEmployees()?.observe(this, Observer {
 
             observedEmployeesList -> adapter = EmployeesAdapter(this, observedEmployeesList)
 

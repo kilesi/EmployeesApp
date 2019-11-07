@@ -27,32 +27,33 @@ class EmployeesAdapter(internal var context: Context, internal var empList: List
 
     override fun onBindViewHolder(holder: EmployeesAdapter.EmployeesViewHolder, position: Int) {
 
-        val (id, name, salary, age, profileImageUrl) = empList[position]
+        val (id, employee_name, employee_salary, employee_age, profile_image) = empList[position]
 
         Glide.with(context)
-            .load(profileImageUrl)
-            .into(holder.profileImageUrl)
+            .load(profile_image)
+            .into(holder.profile_image)
 
         holder.id.text = id.toString()
-        holder.name.text = name
-        holder.salary.text = salary
-        holder.age.text = age
+        holder.name.text = employee_name
+        holder.salary.text = employee_salary
+        holder.age.text = employee_age
 
     }
 
     inner class EmployeesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val profileImageUrl: ImageView
+        val profile_image: ImageView
         val id: TextView
         val name: TextView
         val salary: TextView
         val age: TextView
 
         init {
-            profileImageUrl = itemView.findViewById(R.id.ivProfilePic)
             id = itemView.findViewById(R.id.tvId)
             name = itemView.findViewById(R.id.tvName)
             salary = itemView.findViewById(R.id.tvSalary)
             age = itemView.findViewById(R.id.tvAge)
+            profile_image = itemView.findViewById(R.id.ivProfilePic)
+
         }
     }
 

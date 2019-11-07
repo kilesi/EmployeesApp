@@ -1,5 +1,6 @@
 package com.sendy.employeesapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,7 +26,7 @@ return employeesList as MutableLiveData<List<EmployeesModel>>
 
     fun loadEmployees(){
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://dummy.restapiexample.com/api/")
+            .baseUrl("http://dummy.restapiexample.com/api/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -35,6 +36,7 @@ return employeesList as MutableLiveData<List<EmployeesModel>>
         call.enqueue(object : Callback<List<EmployeesModel>>{
             override fun onFailure(call: Call<List<EmployeesModel>>, t: Throwable) {
 
+                Log.d("tag", "payload is empty")
             }
 
             override fun onResponse(
@@ -42,6 +44,8 @@ return employeesList as MutableLiveData<List<EmployeesModel>>
                 response: Response<List<EmployeesModel>>
             ) {
 
+                Log.d("tag", "list of employees" + response.body())
+               employeesList!!.value = response.body()
             }
 
         })
